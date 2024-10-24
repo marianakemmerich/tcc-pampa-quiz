@@ -9,6 +9,9 @@ module.exports = {
         leafGreen: '#6E9A47',
         gold: '#CFB040',
         sunshine: '#F0C117',
+      },
+      fontFamily: {
+        poppins: ['Poppins']
       }
     },
   },
