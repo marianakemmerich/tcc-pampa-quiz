@@ -1,12 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
-interface ButtonProps {
-    label: string
-    route: string
-    type?: 'button' | 'submit' | 'reset'
-    className?: string
-}
+import { ButtonProps } from '../types/Button'
 
 const Button = ({ label, route, type = 'button', className = '' }: ButtonProps) => {
     const navigate = useNavigate()
