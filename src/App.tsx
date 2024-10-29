@@ -1,4 +1,5 @@
 import Home from '../src/pages/Home'
+import Menu from '../src/pages/Menu'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<Menu />} />
       </Routes>
     </Router>
   )
