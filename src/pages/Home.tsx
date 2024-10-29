@@ -8,7 +8,7 @@ const Home = () => {
       <div className='flex flex-col items-center justify-center'>
         <img src={logo} alt="Pampa Quiz logo" className='w-[3/5] md:w-[500px]' />
       </div>
-      <Button label='Jogar' route='/game' className='mt-14'/>
+      <Button label='Jogar' route='/menu' className='mt-14'/>
     </div>
   )
 }
