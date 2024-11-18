@@ -1,0 +1,42 @@
+{
+    "fauna": [
+        {
+           "id": 1,
+           "level": "easy",
+            "question": "Qual é o nome científico do Gato-palheiro-pampeano?",
+            "options": [
+                {"a": "Leopardus colocola", "isCorrect": true},
+                {"b": "Leopardus pardalis", "isCorrect": false},
+                {"c": "Leopardus guttulus", "isCorrect": false},
+                {"d": "Leopardus geoffroyi", "isCorrect": false}
+            ] 
+        }
+        
+    ],
+    "flora": [
+        {
+            "id": 1,
+           "level": "easy",
+            "question": "",
+            "options": [
+                {"a": "", "isCorrect": true},
+                {"b": "", "isCorrect":false},
+                {"c": "", "isCorrect": false},
+                {"d": "", "isCorrect": false}
+            ]
+        }
+    ],
+    "geral": [
+        {
+            "id": 1,
+           "level": "easy",
+            "question": "",
+            "options": [
+                {"a": "", "isCorrect": true},
+                {"b": "", "isCorrect": false},
+                {"c": "", "isCorrect": false},
+                {"d": "", "isCorrect": false}
+            ]
+        }
+    ]
+}
