@@ -1,43 +1,47 @@
-import {useState} from 'react'
+import { useState } from "react"
 
 interface Alternative {
-    answer: string
-    isCorrect: boolean
+  answer: string
+  isCorrect: boolean
 }
 
 interface AlternativeProps {
-    options: Alternative[]
-    onSelect: (correctAnswer: string) => void
+  option: Alternative
+  onSelect: (answer: string, isCorrect: boolean) => void
+  isDisabled: boolean
+  selectedAnswer: string | null
 }
 
-const Alternative = ({ options, onSelect }: AlternativeProps) => {
-    const [answerStatus, setAnswerStatus] = useState<string | null>(null)
-    const [feedback, setFeedback] = useState<string | null>(null)
+const Alternative = ({
+  option,
+  onSelect,
+  isDisabled,
+  selectedAnswer,
+}: AlternativeProps) => {
+  const handleAnswer = () => {
+    onSelect(option.answer, option.isCorrect)
+  }
 
-    const handleAnswer = (answer: string, isCorrect: boolean) => {
-        onSelect(answer)
-
-        setAnswerStatus(answer)
-        setFeedback(isCorrect ? "correta" : "incorreta");
-    }
+  const isCorrect = selectedAnswer === option.answer && option.isCorrect
+  const isIncorrect = selectedAnswer === option.answer && !option.isCorrect
 
   return (
-    <div>
-        {options.map((opcao, index) => (
-        <button
-          key={index}
-          onClick={() => handleAnswer(opcao.answer, opcao.isCorrect)}
-          className={`alternativa-btn w-full p-4 text-lg rounded-md my-2 
-            ${feedback === "correta" && answerStatus === opcao.answer ? "bg-green-500" : ""}
-            ${feedback === "incorreta" && answerStatus === opcao.answer ? "bg-red-500" : ""}
-            ${feedback ? "cursor-not-allowed" : ""}
-          `}
-          disabled={!!feedback}
-        >
-          {opcao.answer}
-        </button>
-      ))}
-    </div>
+    <button
+      onClick={handleAnswer}
+      disabled={isDisabled}
+      className={`w-[350px] p-4 text-lg rounded-md border shadow-md
+        ${
+          isCorrect
+            ? "bg-green-800 text-white"
+            : isIncorrect
+            ? "bg-red-500 text-white"
+            : "bg-white text-black"
+        }
+        ${isDisabled ? "cursor-not-allowed" : "hover:bg-gray-100"}
+      `}
+    >
+      {option.answer}
+    </button>
   )
 }
 
