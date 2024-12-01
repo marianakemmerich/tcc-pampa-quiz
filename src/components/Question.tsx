@@ -5,7 +5,7 @@ interface QuestionProps {
 const Question = ({ question }: QuestionProps) => {
   return (
     <div>
-        <h2>{question}</h2>
+        <h2 className="text-xl font-bold mb-12">{question}</h2>
     </div>
   )
 }
