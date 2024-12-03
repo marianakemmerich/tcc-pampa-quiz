@@ -12,7 +12,7 @@ const BackButton = () => {
   return (
     <div className='p-6'>
         <button onClick={handleBack}>
-            <img src={ArrowBtn} alt="Go back" className='w-[50px] md:w-[60px] mt-4 ml-4 md:ml-8' />
+            <img src={ArrowBtn} alt="Go back" className='w-[40px] md:w-[50px] mt-4 ml-4 md:ml-8' />
         </button>
     </div>
   )
