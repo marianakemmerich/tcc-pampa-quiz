@@ -1,7 +1,8 @@
 export interface LevelModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    selectedLevel: string;
-    setSelectedLevel: (level: string) => void;
-    onStartGame: () => void;
+    isOpen: boolean
+    onClose: () => void
+    selectedLevel: string | null
+    setSelectedLevel: (level: string) => void
+    onStartGame: () => void
+    category: string
 }
