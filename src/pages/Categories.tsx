@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import BackButton from '../components/BackButton'
 import CategoryCard from '../components/CategoryCard'
 import LevelModal from '../components/LevelModal'
-import img from '../assets/logo/pampa-quiz-logo.png'
+import imgFauna from '../assets/icons/fauna-icon.png'
+import imgFlora from '../assets/icons/flora-icon.png'
+import imgGeral from '../assets/icons/geral-icon.png'
 
 const Categories = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -17,6 +19,15 @@ const Categories = () => {
   const closeModal = () => {
     setIsModalOpen(false)
     setSelectedCategory(null)
+  }
+
+  // Defina explicitamente o tipo de categoria
+  type Category = 'fauna' | 'flora' | 'geral'
+
+  const categoryImages: Record<Category, string> = {
+    fauna: imgFauna,
+    flora: imgFlora,
+    geral: imgGeral
   }
 
   return (
@@ -38,7 +49,7 @@ const Categories = () => {
             key={category}
             label={category.charAt(0).toUpperCase() + category.slice(1)}
             category={category}
-            image={img}
+            image={categoryImages[category as Category]}
             className={['bg-sunshine', 'bg-leafGreen', 'bg-skyBlue'][index]}
             onClick={() => handleCategorySelect(category)}
           />
@@ -50,10 +61,11 @@ const Categories = () => {
         onClose={closeModal}
         selectedLevel={selectedLevel ?? ''}
         setSelectedLevel={setSelectedLevel}
-        category={selectedCategory ?? ''} onStartGame={function (): void {
+        category={selectedCategory ?? ''}
+        onStartGame={function (): void {
           throw new Error('Function not implemented.')
-        } }      />
-
+        }}
+      />
     </div>
   )
 }
