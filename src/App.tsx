@@ -5,6 +5,7 @@ import Fauna from './pages/Fauna'
 import Flora from './pages/Flora'
 import Geral from './pages/Geral'
 import Score from './pages/ScorePage'
+import Rewards from './pages/Rewards'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/quiz-flora' element={<Flora />} />
         <Route path='/quiz-geral' element={<Geral />} />
         <Route path='/score' element={<Score />} />
+        <Route path='/rewards' element={<Rewards />} />
       </Routes>
     </Router>
   )
