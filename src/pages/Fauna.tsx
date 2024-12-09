@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Question from '../components/Question'
 import Alternative from '../components/Alternative'
@@ -20,6 +20,7 @@ interface QuestionType {
 
 const Fauna = () => {
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
   const [questions, setQuestions] = useState<QuestionType[]>([])
   const [currentQuestion, setCurrentQuestion] = useState<QuestionType | null>(null)
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
@@ -42,7 +43,7 @@ const Fauna = () => {
           setQuestionIndex(0)
           setPoints(0)
         } else {
-          setQuestions([]);
+          setQuestions([])
         }
       } catch (error) {
         console.error('Erro ao buscar as perguntas:', error)
@@ -74,15 +75,16 @@ const Fauna = () => {
     }, 1000)
   }
 
-  const restartQuiz = () => {
-    setQuestionIndex(0)
-    setPoints(0)
-    setSelectedAnswer(null)
+  const saveScoreAndRedirect = () => {
+    const storedScores = JSON.parse(localStorage.getItem('playerScores') || '[]')
+    const updatedScores = [points, ...storedScores].slice(0, 5)
+    localStorage.setItem('playerScores', JSON.stringify(updatedScores))
+    navigate('/score')
   }
 
   return (
     <div
-      className='w-screen h-screen flex flex-col items-center justify-center'
+      className="w-screen h-screen flex flex-col items-center justify-center"
       style={{
         backgroundImage: "url('image/fauna-bg.png')",
         backgroundSize: 'cover',
@@ -96,13 +98,13 @@ const Fauna = () => {
         points={points}
       />
 
-      <div className='mt-20 flex flex-col items-center justify-center'>
+      <div className="mt-20 flex flex-col items-center justify-center">
         {isLoading ? (
           <p>Carregando perguntas...</p>
         ) : currentQuestion ? (
           <>
             <Question question={currentQuestion.question} />
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4'>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               {currentQuestion.options.map((option, index) => (
                 <Alternative
                   key={index}
@@ -114,7 +116,7 @@ const Fauna = () => {
               ))}
             </div>
             {selectedAnswer && (
-              <div className='mt-4 text-lg font-semibold'>
+              <div className="mt-4 text-lg font-semibold">
                 {selectedAnswer === currentQuestion.options.find((option) => option.isCorrect)?.answer
                   ? 'Resposta correta!'
                   : 'Resposta errada!'}
@@ -122,13 +124,13 @@ const Fauna = () => {
             )}
           </>
         ) : (
-          <div className='text-center mt-8'>
+          <div className="text-center mt-8">
             {questions.length === 0 ? (
               <div>
                 <p>Sem perguntas disponíveis para esta categoria e nível.</p>
                 <button
-                  onClick={restartQuiz}
-                  className='mt-4 px-4 py-2 bg-blue-500 text-white rounded'
+                  onClick={() => setQuestionIndex(0)}
+                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
                 >
                   Reiniciar Quiz
                 </button>
@@ -137,10 +139,10 @@ const Fauna = () => {
               <div>
                 <p>Parabéns! Você completou o quiz.</p>
                 <button
-                  onClick={restartQuiz}
-                  className='mt-4 px-4 py-2 bg-blue-500 text-white rounded'
+                  onClick={saveScoreAndRedirect}
+                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
                 >
-                  Jogar Novamente
+                  Ver Pontuações
                 </button>
               </div>
             )}
