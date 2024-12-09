@@ -10,7 +10,7 @@ const Button = ({ label, route, type = 'button', className = '' }: ButtonProps) 
     }
 
   return (
-    <button onClick={handleClick} className='bg-sunshine w-[200px] h-[60px] rounded font-poppins font-medium text-[20px] md:text-[30px]'>{label}</button>
+    <button onClick={handleClick} className='bg-sunshine w-[250px] h-[60px] rounded font-poppins font-medium text-[20px] md:text-[30px]'>{label}</button>
   )
 }
 
