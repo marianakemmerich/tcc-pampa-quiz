@@ -1,4 +1,3 @@
-// components/Score.tsx
 import React from 'react'
 
 interface ScoreProps {
@@ -7,7 +6,7 @@ interface ScoreProps {
 
 const Score = ({ points }: ScoreProps) => {
   return (
-    <div className="text-xl font-semibold text-white">
+    <div className='text-xl font-semibold text-white'>
       {points}
     </div>
   )
