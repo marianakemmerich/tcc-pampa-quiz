@@ -16,8 +16,8 @@ const Menu = () => {
         </header>
         <div className='flex flex-col gap-8'>
             <Button label='Jogar' route='/categories' />
-            <Button label='Opções' route='/options' />
             <Button label='Pontuação' route='/score' />
+            <Button label='Recompensas' route='/rewards' />
         </div>
     </div>
   )
