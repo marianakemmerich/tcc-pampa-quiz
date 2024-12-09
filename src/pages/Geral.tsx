@@ -4,6 +4,8 @@ import axios from 'axios'
 import Question from '../components/Question'
 import Alternative from '../components/Alternative'
 import Header from '../components/Header'
+import NextQuestionButton from '../components/NextQuestionButton'
+import NextLevelButton from '../components/NextLevelButton'
 
 interface Option {
   answer: string
@@ -134,6 +136,10 @@ const Geral = () => {
                   : 'Resposta errada!'}
               </div>
             )}
+            <NextQuestionButton
+              onNext={() => setQuestionIndex((prevIndex) => prevIndex + 1)}
+              isDisabled={questionIndex >= questions.length - 1}
+            />
           </>
         ) : (
           <div className='text-center mt-8'>
@@ -150,6 +156,12 @@ const Geral = () => {
             ) : (
               <div>
                 <p>Parabéns! Você completou o quiz.</p>
+                <NextLevelButton
+                  onNextLevel={() => {
+                    const nextLevel = level === 'fácil' ? 'médio' : 'difícil';
+                    navigate(`/quiz-${category}?level=${nextLevel}`);
+                  }}
+                />
                 <button
                   onClick={saveScoreAndRedirect}
                   className='mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
