@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import BackBtn from '../components/BackButton'
 
 const ScorePage = () => {
   const [scores, setScores] = useState<number[]>([])
@@ -17,6 +18,9 @@ const ScorePage = () => {
         backgroundPosition: 'center',
       }}
     >
+      <header className='items-left fixed top-2 md:top-0 w-screen'>
+          <BackBtn />
+      </header>
       <h1 className="text-3xl font-bold mb-6 text-white">Últimas Pontuações</h1>
       <div className="w-full max-w-md bg-sunshine rounded-lg p-6 shadow-lg text-center">
         <ul className="space-y-4">
