@@ -35,8 +35,8 @@ const rewards = [
     level: 'fácil',
     image: 'image/rewards/beija-flor-de-barba-azul.png',
     requiredPoints: 175,
-    commonName: 'Beija-flor-de-barba-azul',
-    scientificName: 'Handroanthus albus',
+    commonName: 'Beija-flor-de-veste-preta',
+    scientificName: 'Anthracothorax nigricollis',
     description: 'O ipê-amarelo é uma árvore símbolo do Brasil, conhecida por suas flores amarelas deslumbrantes.'
   },
   {
@@ -46,7 +46,7 @@ const rewards = [
     image: 'image/rewards/graxaim-do-campo.png',
     requiredPoints: 525,
     commonName: 'Graxaim-do-campo',
-    scientificName: 'Jacaranda mimosifolia',
+    scientificName: 'Cerdocyon thous',
     description: 'O jacarandá encanta com suas flores lilases, muito comuns em paisagismo urbano.'
   },
   {
@@ -56,7 +56,7 @@ const rewards = [
     image: 'image/rewards/tuco-tuco.png',
     requiredPoints: 1050,
     commonName: 'Tuco-tuco',
-    scientificName: 'Cereus jamacaru',
+    scientificName: 'Ctenomys torquatus',
     description: 'O mandacaru é uma planta adaptada ao semiárido brasileiro, essencial para a fauna local.'
   },
   {
@@ -66,7 +66,7 @@ const rewards = [
     image: 'image/rewards/gato-do-mato-grande.png',
     requiredPoints: 175,
     commonName: 'Gato-do-mato-grande',
-    scientificName: 'Ramphastos toco',
+    scientificName: 'Leopardus geoffroyi',
     description: 'O tucano é conhecido por seu grande bico colorido e sua presença em florestas tropicais.'
   },
   {
@@ -75,8 +75,8 @@ const rewards = [
     level: 'médio',
     image: 'image/rewards/papa-moscas-do-campo.png',
     requiredPoints: 525,
-    commonName: 'Papa-moscas-do-campo',
-    scientificName: 'Chrysocyon brachyurus',
+    commonName: 'Caminheiro-de-unha-curta',
+    scientificName: 'Anthus furcatus',
     description: 'O lobo-guará é um animal icônico do cerrado brasileiro, conhecido por sua pelagem avermelhada.'
   },
   {
@@ -86,7 +86,7 @@ const rewards = [
     image: 'image/rewards/veado-campeiro.png',
     requiredPoints: 1050,
     commonName: 'Veado-campeiro',
-    scientificName: 'Victoria amazonica',
+    scientificName: 'Ozotoceros bezoarticus',
     description: 'A vitória-régia é uma planta aquática nativa da Amazônia, famosa por suas folhas gigantes.'
   }
 ]
