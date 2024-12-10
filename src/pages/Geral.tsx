@@ -72,14 +72,26 @@ const Geral = () => {
 
   const verifyAnswer = (answer: string, isCorrect: boolean) => {
     if (isCorrect) {
-      setPoints((prevPoints) => prevPoints + 1)
+      const pointsPerQuestion = level === 'fácil' ? 25 : level === 'médio' ? 75 : 150
+      const newPoints = points + pointsPerQuestion
+      setPoints(newPoints)
+  
+      const currentScores = JSON.parse(localStorage.getItem('scores') || '{}')
+      const updatedScores = {
+        ...currentScores,
+        [category]: {
+          ...currentScores[category],
+          [level]: Math.max(currentScores[category]?.[level] || 0, newPoints),
+        },
+      }
+      localStorage.setItem('scores', JSON.stringify(updatedScores))
     }
     setSelectedAnswer(answer)
 
     setTimeout(() => {
       setQuestionIndex((prevIndex) => prevIndex + 1)
     }, 1000)
-  }
+  }  
 
   const saveScoreAndRedirect = () => {
     const storedScores = JSON.parse(localStorage.getItem('playerScores') || '[]')

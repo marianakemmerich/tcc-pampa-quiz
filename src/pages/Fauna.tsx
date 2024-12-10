@@ -68,14 +68,26 @@ const Fauna = () => {
 
   const verifyAnswer = (answer: string, isCorrect: boolean) => {
     if (isCorrect) {
-      setPoints((prevPoints) => prevPoints + 1)
+      const pointsPerQuestion = level === 'fácil' ? 25 : level === 'médio' ? 75 : 150
+      const newPoints = points + pointsPerQuestion;
+      setPoints(newPoints)
+  
+      const currentScores = JSON.parse(localStorage.getItem('scores') || '{}')
+      const updatedScores = {
+        ...currentScores,
+        [category]: {
+          ...currentScores[category],
+          [level]: Math.max(currentScores[category]?.[level] || 0, newPoints),
+        },
+      }
+      localStorage.setItem('scores', JSON.stringify(updatedScores))
     }
     setSelectedAnswer(answer)
-
+  
     setTimeout(() => {
       setQuestionIndex((prevIndex) => prevIndex + 1)
     }, 1000)
-  }
+  }    
 
   const saveScoreAndRedirect = () => {
     const storedScores = JSON.parse(localStorage.getItem('playerScores') || '[]')
@@ -86,7 +98,7 @@ const Fauna = () => {
 
   return (
     <div
-      className="w-screen h-screen flex flex-col items-center justify-center"
+      className='w-screen h-screen flex flex-col items-center justify-center'
       style={{
         backgroundImage: "url('image/fauna-bg.png')",
         backgroundSize: 'cover',
@@ -100,13 +112,13 @@ const Fauna = () => {
         points={points}
       />
 
-      <div className="mt-20 flex flex-col items-center justify-center">
+      <div className='mt-20 flex flex-col items-center justify-center'>
         {isLoading ? (
           <p>Carregando perguntas...</p>
         ) : currentQuestion ? (
           <>
             <Question question={currentQuestion.question} />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4'>
               {currentQuestion.options.map((option, index) => (
                 <Alternative
                   key={index}
@@ -118,7 +130,7 @@ const Fauna = () => {
               ))}
             </div>
             {selectedAnswer && (
-              <div className="mt-4 text-lg font-semibold">
+              <div className='mt-4 text-lg font-semibold'>
                 {selectedAnswer === currentQuestion.options.find((option) => option.isCorrect)?.answer
                   ? 'Resposta correta!'
                   : 'Resposta errada!'}
@@ -130,13 +142,13 @@ const Fauna = () => {
             />
           </>
         ) : (
-          <div className="text-center mt-8">
+          <div className='text-center mt-8'>
             {questions.length === 0 ? (
               <div>
                 <p>Sem perguntas disponíveis para esta categoria e nível.</p>
                 <button
                   onClick={() => setQuestionIndex(0)}
-                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+                  className='mt-4 px-4 py-2 bg-blue-500 text-white rounded'
                 >
                   Reiniciar Quiz
                 </button>
@@ -152,7 +164,7 @@ const Fauna = () => {
                 />
                 <button
                   onClick={saveScoreAndRedirect}
-                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+                  className='mt-4 px-4 py-2 bg-blue-500 text-white rounded'
                 >
                   Ver Pontuações
                 </button>
