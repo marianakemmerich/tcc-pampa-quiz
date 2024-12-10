@@ -6,6 +6,7 @@ import Alternative from '../components/Alternative'
 import Header from '../components/Header'
 import NextQuestionButton from '../components/NextQuestionButton'
 import NextLevelButton from '../components/NextLevelButton'
+import CongratsMessage from '../components/CongratsMessage'
 
 interface Option {
   answer: string
@@ -38,17 +39,14 @@ const Flora = () => {
       try {
         setIsLoading(true)
 
-        const response = await axios.get<QuestionType[]>(
-          `http://localhost:5000/${category}`,
-          { params: { level } }
-        )
+        const response = await axios.get<QuestionType[]>(`http://localhost:5000/${category}`, { params: { level } })
 
         if (response.data.length > 0) {
           setQuestions(response.data)
           setQuestionIndex(0)
           setPoints(0)
         } else {
-          console.warn('Nenhuma pergunta encontrada para os filtros fornecidos.');
+          console.warn('Nenhuma pergunta encontrada para os filtros fornecidos.')
           setQuestions([])
         }
       } catch (error) {
@@ -75,8 +73,8 @@ const Flora = () => {
       const pointsPerQuestion = level === 'fácil' ? 25 : level === 'médio' ? 75 : 150
       const newPoints = points + pointsPerQuestion
       setPoints(newPoints)
-  
-      const currentScores = JSON.parse(localStorage.getItem('scores') || '{}');
+
+      const currentScores = JSON.parse(localStorage.getItem('scores') || '{}')
       const updatedScores = {
         ...currentScores,
         [category]: {
@@ -87,7 +85,7 @@ const Flora = () => {
       localStorage.setItem('scores', JSON.stringify(updatedScores))
     }
     setSelectedAnswer(answer)
-  
+
     setTimeout(() => {
       setQuestionIndex((prevIndex) => prevIndex + 1)
     }, 1000)
@@ -133,21 +131,6 @@ const Flora = () => {
                 />
               ))}
             </div>
-            {selectedAnswer && (
-              <div
-                className={`mt-4 text-lg font-semibold ${
-                  selectedAnswer ===
-                  currentQuestion.options.find((option) => option.isCorrect)?.answer
-                    ? 'text-green-500'
-                    : 'text-red-500'
-                }`}
-              >
-                {selectedAnswer ===
-                currentQuestion.options.find((option) => option.isCorrect)?.answer
-                  ? 'Resposta correta!'
-                  : 'Resposta errada!'}
-              </div>
-            )}
             <NextQuestionButton
               onNext={() => setQuestionIndex((prevIndex) => prevIndex + 1)}
               isDisabled={questionIndex >= questions.length - 1}
@@ -167,11 +150,11 @@ const Flora = () => {
               </div>
             ) : (
               <div>
-                <p>Parabéns! Você completou o quiz.</p>
+                <CongratsMessage />
                 <NextLevelButton
                   onNextLevel={() => {
-                    const nextLevel = level === 'fácil' ? 'médio' : 'difícil';
-                    navigate(`/quiz-${category}?level=${nextLevel}`);
+                    const nextLevel = level === 'fácil' ? 'médio' : 'difícil'
+                    navigate(`/quiz-${category}?level=${nextLevel}`)
                   }}
                 />
                 <button

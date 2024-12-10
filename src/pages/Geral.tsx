@@ -6,6 +6,7 @@ import Alternative from '../components/Alternative'
 import Header from '../components/Header'
 import NextQuestionButton from '../components/NextQuestionButton'
 import NextLevelButton from '../components/NextLevelButton'
+import CongratsMessage from '../components/CongratsMessage'
 
 interface Option {
   answer: string
@@ -133,21 +134,6 @@ const Geral = () => {
                 />
               ))}
             </div>
-            {selectedAnswer && (
-              <div
-                className={`mt-4 text-lg font-semibold ${
-                  selectedAnswer ===
-                  currentQuestion.options.find((option) => option.isCorrect)?.answer
-                    ? 'text-green-500'
-                    : 'text-red-500'
-                }`}
-              >
-                {selectedAnswer ===
-                currentQuestion.options.find((option) => option.isCorrect)?.answer
-                  ? 'Resposta correta!'
-                  : 'Resposta errada!'}
-              </div>
-            )}
             <NextQuestionButton
               onNext={() => setQuestionIndex((prevIndex) => prevIndex + 1)}
               isDisabled={questionIndex >= questions.length - 1}
@@ -167,7 +153,7 @@ const Geral = () => {
               </div>
             ) : (
               <div>
-                <p>Parabéns! Você completou o quiz.</p>
+                <CongratsMessage />
                 <NextLevelButton
                   onNextLevel={() => {
                     const nextLevel = level === 'fácil' ? 'médio' : 'difícil';
