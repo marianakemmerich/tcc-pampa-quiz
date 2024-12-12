@@ -7,6 +7,8 @@ import Header from '../components/Header'
 import NextQuestionButton from '../components/NextQuestionButton'
 import NextLevelButton from '../components/NextLevelButton'
 import CongratsMessage from '../components/CongratsMessage'
+import CorrectAnswer from '../components/CorrectAnswer'
+import WrongAnswer from '../components/WrongAnswer'
 
 interface Option {
   answer: string
@@ -30,6 +32,8 @@ const Flora = () => {
   const [points, setPoints] = useState(0)
   const [questionIndex, setQuestionIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
+  const [showCorrectAnswer, setShowCorrectAnswer] = useState(false)
+  const [showWrongAnswer, setShowWrongAnswer] = useState(false)
 
   const level = searchParams.get('level') || 'fácil'
   const category = 'flora'
@@ -69,7 +73,10 @@ const Flora = () => {
   }, [questions, questionIndex])
 
   const verifyAnswer = (answer: string, isCorrect: boolean) => {
+    setSelectedAnswer(answer)
+
     if (isCorrect) {
+      setShowCorrectAnswer(true)
       const pointsPerQuestion = level === 'fácil' ? 25 : level === 'médio' ? 75 : 150
       const newPoints = points + pointsPerQuestion
       setPoints(newPoints)
@@ -83,12 +90,15 @@ const Flora = () => {
         },
       }
       localStorage.setItem('scores', JSON.stringify(updatedScores))
+    } else {
+      setShowWrongAnswer(true)
     }
-    setSelectedAnswer(answer)
 
     setTimeout(() => {
+      setShowCorrectAnswer(false)
+      setShowWrongAnswer(false)
       setQuestionIndex((prevIndex) => prevIndex + 1)
-    }, 1000)
+    }, 1500)
   }
 
   const saveScoreAndRedirect = () => {
@@ -115,6 +125,8 @@ const Flora = () => {
       />
 
       <div className='mt-20 flex flex-col items-center justify-center'>
+      {showCorrectAnswer && <CorrectAnswer />}
+      {showWrongAnswer && <WrongAnswer />}
         {isLoading ? (
           <p>Carregando perguntas...</p>
         ) : currentQuestion ? (
