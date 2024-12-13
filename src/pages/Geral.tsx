@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Question from '../components/Question'
 import Alternative from '../components/Alternative'
@@ -9,6 +9,8 @@ import NextLevelButton from '../components/NextLevelButton'
 import CongratsMessage from '../components/CongratsMessage'
 import CorrectAnswer from '../components/CorrectAnswer'
 import WrongAnswer from '../components/WrongAnswer'
+import RestartQuizButton from '../components/RestartButton'
+import ViewScoresButton from '../components/ScoreButton'
 
 interface Option {
   answer: string
@@ -36,24 +38,20 @@ const Geral = () => {
   const [showWrongAnswer, setShowWrongAnswer] = useState(false)
 
   const level = searchParams.get('level') || 'fácil'
-  const category = 'geral'
+  const category = searchParams.get('category') || 'geral'
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         setIsLoading(true)
-
         const endpoint = `http://localhost:5000/${category}`
-        const response = await axios.get<QuestionType[]>(endpoint, {
-          params: { level }
-        })
+        const response = await axios.get<QuestionType[]>(endpoint, { params: { level } })
 
         if (response.data.length > 0) {
           setQuestions(response.data)
           setQuestionIndex(0)
           setPoints(0)
         } else {
-          console.warn('Nenhuma pergunta encontrada para os filtros fornecidos.')
           setQuestions([])
         }
       } catch (error) {
@@ -64,7 +62,7 @@ const Geral = () => {
     }
 
     fetchQuestions()
-  }, [level])
+  }, [category, level])
 
   useEffect(() => {
     if (questions.length > 0 && questionIndex < questions.length) {
@@ -102,7 +100,7 @@ const Geral = () => {
       setShowWrongAnswer(false)
       setQuestionIndex((prevIndex) => prevIndex + 1)
     }, 1500)
-  }  
+  }
 
   const saveScoreAndRedirect = () => {
     const storedScores = JSON.parse(localStorage.getItem('playerScores') || '[]')
@@ -111,13 +109,15 @@ const Geral = () => {
     navigate('/score')
   }
 
+  const isQuizCompleted = questionIndex >= questions.length;
+
   return (
     <div
       className='w-screen h-screen flex flex-col items-center justify-center'
       style={{
         backgroundImage: "url('image/geral-bg.png')",
         backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundPosition: 'center',
       }}
     >
       <Header
@@ -128,8 +128,8 @@ const Geral = () => {
       />
 
       <div className='mt-20 flex flex-col items-center justify-center'>
-      {showCorrectAnswer && <CorrectAnswer />}
-      {showWrongAnswer && <WrongAnswer />}
+        {showCorrectAnswer && <CorrectAnswer />}
+        {showWrongAnswer && <WrongAnswer />}
         {isLoading ? (
           <p>Carregando perguntas...</p>
         ) : currentQuestion ? (
@@ -146,41 +146,37 @@ const Geral = () => {
                 />
               ))}
             </div>
-            <NextQuestionButton
-              onNext={() => setQuestionIndex((prevIndex) => prevIndex + 1)}
-              isDisabled={questionIndex >= questions.length - 1}
-            />
+            {!isQuizCompleted && (
+              <NextQuestionButton
+                onNext={() => setQuestionIndex((prevIndex) => prevIndex + 1)}
+                isDisabled={questionIndex >= questions.length - 1}
+              />
+            )}
           </>
         ) : (
-          <div className='text-center mt-8'>
-            {questions.length === 0 ? (
-              <div>
-                <p>Sem perguntas disponíveis para esta categoria e nível.</p>
-                <button
-                  onClick={() => navigate(`/quiz?level=${level}&category=${category}`)}
-                  className='mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
-                >
-                  Reiniciar Quiz
-                </button>
+          <div className='text-center mt-8 p-4'>
+            {isQuizCompleted ? (
+              <div className='flex flex-col items-center gap-4'>
+                <CongratsMessage />
+                <RestartQuizButton onClick={() => setQuestionIndex(0)} />
+                <div className='flex gap-4 mt-4'>
+                  <NextLevelButton
+                    onNextLevel={() => {
+                      const nextLevel = level === 'fácil' ? 'médio' : 'difícil'
+                      navigate(`/quiz-${category}?level=${nextLevel}`)
+                    }}
+                  />
+                  <ViewScoresButton onClick={saveScoreAndRedirect} />
+                </div>
               </div>
             ) : (
               <div>
-                <CongratsMessage />
-                <NextLevelButton
-                  onNextLevel={() => {
-                    const nextLevel = level === 'fácil' ? 'médio' : 'difícil';
-                    navigate(`/quiz-${category}?level=${nextLevel}`);
-                  }}
-                />
-                <button
-                  onClick={saveScoreAndRedirect}
-                  className='mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
-                >
-                  Ver Pontuações
-                </button>
+                <p>Sem perguntas disponíveis para esta categoria e nível.</p>
+                <RestartQuizButton onClick={() => setQuestionIndex(0)} />
               </div>
             )}
           </div>
+
         )}
       </div>
     </div>

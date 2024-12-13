@@ -9,6 +9,8 @@ import NextLevelButton from '../components/NextLevelButton'
 import CongratsMessage from '../components/CongratsMessage'
 import CorrectAnswer from '../components/CorrectAnswer'
 import WrongAnswer from '../components/WrongAnswer'
+import RestartQuizButton from '../components/RestartButton'
+import ViewScoresButton from '../components/ScoreButton'
 
 interface Option {
   answer: string
@@ -107,6 +109,8 @@ const Fauna = () => {
     navigate('/score')
   }
 
+  const isQuizCompleted = questionIndex >= questions.length;
+
   return (
     <div
       className='w-screen h-screen flex flex-col items-center justify-center'
@@ -142,41 +146,37 @@ const Fauna = () => {
                 />
               ))}
             </div>
-            <NextQuestionButton
-              onNext={() => setQuestionIndex((prevIndex) => prevIndex + 1)}
-              isDisabled={questionIndex >= questions.length - 1}
-            />
+            {!isQuizCompleted && (
+              <NextQuestionButton
+                onNext={() => setQuestionIndex((prevIndex) => prevIndex + 1)}
+                isDisabled={questionIndex >= questions.length - 1}
+              />
+            )}
           </>
         ) : (
-          <div className='text-center mt-8'>
-            {questions.length === 0 ? (
-              <div>
-                <p>Sem perguntas disponíveis para esta categoria e nível.</p>
-                <button
-                  onClick={() => setQuestionIndex(0)}
-                  className='mt-4 px-4 py-2 bg-blue-500 text-white rounded'
-                >
-                  Reiniciar Quiz
-                </button>
+          <div className='text-center mt-8 p-4'>
+            {isQuizCompleted ? (
+              <div className='flex flex-col items-center gap-4'>
+                <CongratsMessage />
+                <RestartQuizButton onClick={() => setQuestionIndex(0)} />
+                <div className='flex gap-4 mt-4'>
+                  <NextLevelButton
+                    onNextLevel={() => {
+                      const nextLevel = level === 'fácil' ? 'médio' : 'difícil'
+                      navigate(`/quiz-${category}?level=${nextLevel}`)
+                    }}
+                  />
+                  <ViewScoresButton onClick={saveScoreAndRedirect} />
+                </div>
               </div>
             ) : (
               <div>
-                <CongratsMessage />
-                <NextLevelButton
-                  onNextLevel={() => {
-                    const nextLevel = level === 'fácil' ? 'médio' : 'difícil';
-                    navigate(`/quiz-${category}?level=${nextLevel}`);
-                  }}
-                />
-                <button
-                  onClick={saveScoreAndRedirect}
-                  className='mt-4 px-4 py-2 bg-blue-500 text-white rounded'
-                >
-                  Ver Pontuações
-                </button>
+                <p>Sem perguntas disponíveis para esta categoria e nível.</p>
+                <RestartQuizButton onClick={() => setQuestionIndex(0)} />
               </div>
             )}
           </div>
+
         )}
       </div>
     </div>
