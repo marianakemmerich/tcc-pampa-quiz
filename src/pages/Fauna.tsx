@@ -109,6 +109,12 @@ const Fauna = () => {
     navigate('/score')
   }
 
+  const resetQuiz = () => {
+    setQuestionIndex(0)
+    setPoints(0)
+    setSelectedAnswer(null)
+  }  
+
   const isQuizCompleted = questionIndex >= questions.length;
 
   return (
@@ -158,7 +164,7 @@ const Fauna = () => {
             {isQuizCompleted ? (
               <div className='flex flex-col items-center gap-4'>
                 <CongratsMessage />
-                <RestartQuizButton onClick={() => setQuestionIndex(0)} />
+                <RestartQuizButton onClick={resetQuiz} />
                 <div className='flex gap-4 mt-4'>
                   <NextLevelButton
                     onNextLevel={() => {
@@ -172,7 +178,7 @@ const Fauna = () => {
             ) : (
               <div>
                 <p>Sem perguntas disponíveis para esta categoria e nível.</p>
-                <RestartQuizButton onClick={() => setQuestionIndex(0)} />
+                <RestartQuizButton onClick={resetQuiz} />
               </div>
             )}
           </div>
