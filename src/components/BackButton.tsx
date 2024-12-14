@@ -1,19 +1,27 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import ArrowBtn from '../assets/icons/left-arrow.svg'
 
-const BackButton = () => {
-    const navigate = useNavigate()
+interface BackButtonProps {
+  onBackClick?: () => void
+  navigateTo?: string
+}
 
-    const handleBack = () => {
-        navigate(-1)
+const BackButton = ({ onBackClick, navigateTo }: BackButtonProps) => {
+  const handleBack = () => {
+    if (onBackClick) {
+      onBackClick()
+    } else if (navigateTo) {
+      window.location.href = navigateTo
+    } else {
+      window.history.back()
     }
+  }
 
   return (
     <div className='p-6'>
-        <button onClick={handleBack}>
-            <img src={ArrowBtn} alt="Go back" className='w-[40px] md:w-[50px] mt-4 ml-4 md:ml-8' />
-        </button>
+      <button onClick={handleBack}>
+        <img src={ArrowBtn} alt="Go back" className='w-[40px] md:w-[50px] mt-4 ml-4 md:ml-8' />
+      </button>
     </div>
   )
 }
