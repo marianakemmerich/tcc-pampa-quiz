@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../assets/logo/pampa-quiz-logo.png'
+import logo from '../assets/logo/pampa-quiz-logo.svg'
 import Button from '../components/Button'
 
 const Home = () => {
