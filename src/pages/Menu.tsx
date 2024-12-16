@@ -12,7 +12,7 @@ const Menu = () => {
     }}
     >
         <header className='items-left fixed top-2 md:top-0 w-screen'>
-            <BackButton />
+            <BackButton navigateTo='/' />
         </header>
         <div className='flex flex-col gap-8'>
             <Button label='Jogar' route='/categories' />

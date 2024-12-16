@@ -35,7 +35,7 @@ const Rewards = () => {
       }}
     >
       <header className='items-left fixed top-2 md:top-0 w-screen'>
-        <BackBtn />
+        <BackBtn navigateTo='/menu' />
       </header>
       <h1 className='text-3xl font-bold mb-2 text-white'>Recompensas</h1>
       <p className='text-lg font-bold text-center text-white'>Conheça os animais que você salvou!</p>
