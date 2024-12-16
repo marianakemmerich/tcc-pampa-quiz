@@ -140,7 +140,7 @@ const Geral = () => {
           <p>Carregando perguntas...</p>
         ) : currentQuestion ? (
           <>
-            <Question question={currentQuestion.question} />
+            <Question question={currentQuestion.question} category='geral' />
             <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4'>
               {currentQuestion.options.map((option, index) => (
                 <Alternative
