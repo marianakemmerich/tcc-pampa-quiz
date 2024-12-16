@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import BackButton from '../components/BackButton'
 import CategoryCard from '../components/CategoryCard'
 import LevelModal from '../components/LevelModal'
-import imgFauna from '../assets/icons/fauna-icon.png'
-import imgFlora from '../assets/icons/flora-icon.png'
-import imgGeral from '../assets/icons/geral-icon.png'
+import imgFauna from '../assets/icons/fauna-icon.svg'
+import imgFlora from '../assets/icons/flora-icon.svg'
+import imgGeral from '../assets/icons/geral-icon.svg'
 
 const Categories = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -21,7 +21,6 @@ const Categories = () => {
     setSelectedCategory(null)
   }
 
-  // Defina explicitamente o tipo de categoria
   type Category = 'fauna' | 'flora' | 'geral'
 
   const categoryImages: Record<Category, string> = {
