@@ -19,6 +19,12 @@ const LevelModal = ({
     }
   }
 
+  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget) {
+      onClose()
+    }
+  }
+
   const levelColors: Record<string, string> = {
     Fácil: 'bg-green-500 hover:bg-green-600',
     Médio: 'bg-yellow-500 hover:bg-yellow-600',
@@ -26,15 +32,18 @@ const LevelModal = ({
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white justify-center items-center rounded-lg p-6 w-80">
-        <h4 className="text-xl text-center font-bold mb-4">Escolha o Nível de Dificuldade</h4>
-        <div className="flex flex-col space-y-4">
+    <div
+      className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 font-poppins'
+      onClick={handleOverlayClick}
+    >
+      <div className='bg-white relative rounded-lg p-6 w-80'>
+        <h4 className='text-xl text-center font-bold mb-4'>Escolha o nível de dificuldade</h4>
+        <div className='flex flex-col space-y-4'>
           {['Fácil', 'Médio', 'Difícil'].map((level) => (
             <button
               key={level}
               onClick={() => setSelectedLevel(level)}
-              className={`px-4 py-2 text-white rounded transition ${
+              className={`px-4 py-2 text-white rounded transition test-lg font-bold ${
                 levelColors[level]
               } ${selectedLevel === level ? 'ring-4 ring-opacity-50' : ''}`}
             >
@@ -42,7 +51,7 @@ const LevelModal = ({
             </button>
           ))}
         </div>
-        <div className="flex justify-center mt-4">
+        <div className='flex justify-center mt-4'>
           <button
             onClick={handleStartGame}
             disabled={!selectedLevel}
