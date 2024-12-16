@@ -49,19 +49,19 @@ const Header = ({ level, currentQuestionIndex, totalQuestions, points }: HeaderP
 
       {showModal && (
         <div className='fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 flex items-center justify-center z-50'>
-          <div className='bg-white p-6 rounded-lg w-[450px] h-[300px] flex items-center justify-center text-center'>
+          <div className='bg-white p-6 rounded-lg w-[450px] h-[300px] flex items-center justify-center text-center shadow-lg'>
             <div className='flex flex-col items-center justify-center'>
               <h3 className='mb-2 text-3xl font-bold font-poppins'>Deseja sair do jogo?</h3>
               <p className='mb-4 text-lg font-poppins'>Seu progresso até aqui será perdido.</p>
               <div className='flex justify-around w-1/2 mt-8'>
                 <button
-                  className='px-4 py-2 mx-2 bg-forestGreen text-white font-poppins font-bold rounded'
+                  className='px-4 py-2 mx-2 bg-forestGreen hover:bg-green-900 text-white font-poppins font-bold rounded'
                   onClick={handleConfirmExit}
                 >
                   Ok
                 </button>
                 <button
-                  className='px-4 py-2 mx-4 bg-gray-400 text-black font-poppins font-bold rounded'
+                  className='px-4 py-2 mx-4 bg-gray-400 hover:bg-gray-600 text-gray-800 hover:text-white font-poppins font-bold rounded'
                   onClick={handleCancelExit}
                 >
                   Cancelar
