@@ -29,12 +29,12 @@ const Alternative = ({
     <button
       onClick={handleAnswer}
       disabled={isDisabled}
-      className={`w-[350px] h-[150px] p-4 text-lg rounded-md border shadow-md
+      className={`w-[350px] h-[150px] p-4 text-md font-poppins rounded-md border shadow-md
         ${
           isCorrect
-            ?'bg-green-800 text-white'
+            ?'bg-green-700 text-white'
             : isIncorrect
-            ?'bg-red-500 text-white'
+            ?'bg-red-700 text-white'
             : 'bg-white text-black'
         }
         ${isDisabled ? 'cursor-not-allowed' : 'hover:bg-gray-100'}
