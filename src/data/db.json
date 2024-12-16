@@ -28,7 +28,7 @@
         "id": 3,
         "level": "fácil",
         "category": "fauna",
-        "question": "O veado-campeiro é uma espécie de cervídeo que habita as regiões de áreas aberta como Cerrado e o Pampa. Dentro da cadeia trófica, o veado-campeiro é um animal herbívoro, isto é, se alimenta:",
+        "question": "O veado-campeiro é uma espécie de cervídeo que habita as regiões de áreas abertas como Cerrado e o Pampa. Dentro da cadeia trófica, o veado-campeiro é um animal herbívoro, isto é, se alimenta:",
         "options": [
           { "answer": "Outros animais", "isCorrect": false },
           { "answer": "Plantas", "isCorrect": true },
@@ -66,7 +66,7 @@
         "category": "fauna",
         "question": "Qual é o nome científico do Gato-palheiro-pampeano?",
         "options": [
-          { "answer": "Leopardus colocola", "isCorrect": true },
+          { "answer": "Leopardus munoai", "isCorrect": true },
           { "answer": "Leopardus pardalis", "isCorrect": false },
           { "answer": "Leopardus guttulus", "isCorrect": false },
           { "answer": "Leopardus geoffroyi", "isCorrect": false }
