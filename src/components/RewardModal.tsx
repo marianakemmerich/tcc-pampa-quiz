@@ -18,7 +18,7 @@ const RewardModal = ({
 }: RewardModalProps) => {
   return (
     <div className='fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50'>
-      <div className='relative w-[400px] h-[600px] rounded-lg overflow-hidden shadow-lg'>
+      <div className='relative w-[400px] h-[600px] rounded-lg overflow-hidden shadow-lg cursor-pointer'>
         <button
           onClick={onClose}
           className='absolute top-2 right-2 text-xl text-gray-100 hover:text-white z-10'
