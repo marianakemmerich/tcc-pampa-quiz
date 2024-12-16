@@ -27,7 +27,7 @@ const Rewards = () => {
 
   return (
     <div
-      className='w-screen h-screen flex flex-col items-center justify-center overflow-hidden'
+      className='w-screen h-screen flex flex-col items-center justify-center overflow-hidden font-poppins'
       style={{
         backgroundImage: "url('image/cenario.png')",
         backgroundSize: 'cover',
