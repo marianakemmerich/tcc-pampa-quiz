@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import BackBtn from '../components/BackButton'
+import SaveScoreButton from '../components/SaveScoreButton'
+import ClearScoreButton from '../components/ClearScoreButton'
 
 interface ScoreData {
   [category: string]: {
@@ -9,6 +11,7 @@ interface ScoreData {
 
 const ScorePage = () => {
   const [scores, setScores] = useState<ScoreData>({})
+  const scoreRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const storedScores: ScoreData = JSON.parse(localStorage.getItem('scores') || '{}')
@@ -34,19 +37,23 @@ const ScorePage = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
+      ref={scoreRef}
     >
       <header className='items-left fixed top-2 md:top-0 w-screen'>
-        <BackBtn />
+        <BackBtn navigateTo='/menu' />
       </header>
-      <h1 className='text-3xl font-bold mb-6 text-white'>Pontuações</h1>
-      <div className='w-full max-w-4xl flex flex-wrap justify-center gap-8 rounded-lg p-6 text-center'>
+      <h1 className='text-3xl font-bold mb-6 text-white'>Pontuação</h1>
+
+      <div
+        className='w-full max-w-4xl flex flex-wrap justify-center gap-8 rounded-lg p-6 text-center'
+      >
         {Object.keys(scores).length > 0 ? (
           Object.entries(scores).map(([category, levels]) => (
             <div
               key={category}
               className={`w-64 p-4 rounded shadow-lg ${categoryStyles[category] || 'bg-gray-500'}`}
             >
-              <h2 className="text-2xl font-bold text-white capitalize">{category}</h2>
+              <h2 className='text-2xl font-bold text-white capitalize'>{category}</h2>
               <ul className='space-y-2 mt-3'>
                 {Object.entries(levels).map(([level, points]) => (
                   <li
@@ -60,15 +67,13 @@ const ScorePage = () => {
             </div>
           ))
         ) : (
-          <p className='text-white'>Nenhuma pontuação salva ainda.</p>
+          <p className='text-white text-lg font-bold'>Nenhuma pontuação salva ainda.</p>
         )}
       </div>
-      <button
-        onClick={clearScores}
-        className='mt-6 px-4 py-2 bg-red-500 text-white font-bold rounded hover:bg-red-600'
-      >
-        Zerar pontuação
-      </button>
+      <div className='flex items-center justify-center space-x-8 mt-6'>
+        <ClearScoreButton onClear={clearScores} />
+        <SaveScoreButton targetRef={scoreRef} />
+      </div>
     </div>
   )
 }
