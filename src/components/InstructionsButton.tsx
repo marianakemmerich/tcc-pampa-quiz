@@ -26,7 +26,7 @@ const InstructionsButton = ({ onBackClick, navigateTo }: InstructionsButtonProps
         <img
           src={Help}
           alt='Voltar'
-          className='w-[50px] md:w-[60px] mt-4 ml-4 md:ml-8'
+          className='w-[40px] md:w-[50px] mt-4 ml-4 md:ml-8'
         />
       </button>
     </div>
