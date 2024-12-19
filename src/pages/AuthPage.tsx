@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInAnonymously,
+  updateProfile,
 } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import BackBtn from '../components/BackButton'
@@ -14,13 +15,13 @@ const AuthPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [username, setUsername] = useState('') // Novo estado para o nome de usuário
+  const [username, setUsername] = useState('')
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
+    setError("")
     try {
       await signInWithEmailAndPassword(auth, email, password)
       navigate('/menu')
@@ -34,18 +35,21 @@ const AuthPage = () => {
     setError('')
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match.')
-      return
-    }
-
-    if (!username) {
-      setError('Username is required.')
+      setError("Passwords do not match.")
       return
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password)
-      // Aqui você pode adicionar lógica para salvar o nome de usuário no perfil do usuário ou no banco de dados
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      )
+      if (userCredential.user) {
+        await updateProfile(userCredential.user, {
+          displayName: username,
+        })
+      }
       navigate('/menu')
     } catch (err: any) {
       setError(err.message)
@@ -76,7 +80,7 @@ const AuthPage = () => {
 
       <img src={PampaQuizLogo} alt='Logo' className='w-[150px] mb-6' />
       <div className='p-6 bg-white rounded shadow-lg w-full max-w-md'>
-        <h2 className='text-2xl font-bold mb-4 text-forestGreen'>
+        <h2 className='text-2xl font-bold mb-4 text-green-950'>
           {isSignUp ? 'Cadastre-se' : 'Entre no jogo'}
         </h2>
         {error && <p className='text-red-500'>{error}</p>}
@@ -86,7 +90,7 @@ const AuthPage = () => {
         >
           {isSignUp && (
             <input
-              type='text'
+              type="text"
               placeholder='Nome de usuário'
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -133,7 +137,7 @@ const AuthPage = () => {
           {isSignUp ? 'Já possui uma conta? ' : 'Não possui uma conta? '}
           <span
             onClick={() => setIsSignUp(!isSignUp)}
-            className='text-leafGreen hover:text-forestGreen cursor-pointer underline'
+            className='text-forestGreen hover:text-green-950 cursor-pointer underline'
           >
             {isSignUp ? 'Entre no jogo.' : 'Cadastre-se.'}
           </span>
