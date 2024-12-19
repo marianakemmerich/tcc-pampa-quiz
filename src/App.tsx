@@ -1,4 +1,5 @@
 import Home from '../src/pages/Home'
+import AuthPage from'../src/pages/AuthPage'
 import Menu from '../src/pages/Menu'
 import Categories from '../src/pages/Categories'
 import Fauna from './pages/Fauna'
@@ -14,6 +15,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/auth" element={<AuthPage />} />
         <Route path="/menu" element={<Menu />} />
         <Route path='/categories' element={<Categories />} />
         <Route path='/quiz-fauna' element={<Fauna />} />
