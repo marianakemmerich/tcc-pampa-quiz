@@ -11,6 +11,8 @@ import CorrectAnswer from '../components/CorrectAnswer'
 import WrongAnswer from '../components/WrongAnswer'
 import RestartQuizButton from '../components/RestartButton'
 import ViewScoresButton from '../components/ScoreButton'
+import { getFirestore, collection, addDoc } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 
 interface Option {
   answer: string
@@ -73,6 +75,31 @@ const Geral = () => {
     }
   }, [questions, questionIndex])
 
+  const saveScore = async (points: number) => {
+    const auth = getAuth()
+    const user = auth.currentUser
+    const db = getFirestore()
+
+    if (user) {
+      try {
+        const scoresCollection = collection(db, 'scores')
+        await addDoc(scoresCollection, {
+          uid: user.uid,
+          points,
+          timestamp: new Date(),
+        })
+        console.log('Score saved to Firestore')
+      } catch (error) {
+        console.error('Error saving score to Firestore:', error)
+      }
+    } else {
+      const storedScores = JSON.parse(sessionStorage.getItem('playerScores') || '[]')
+      const updatedScores = [points, ...storedScores].slice(0, 5)
+      sessionStorage.setItem('playerScores', JSON.stringify(updatedScores))
+      console.log('Score saved to sessionStorage')
+    }
+  }
+
   const verifyAnswer = (answer: string, isCorrect: boolean) => {
     setSelectedAnswer(answer)
 
@@ -91,6 +118,8 @@ const Geral = () => {
         },
       }
       localStorage.setItem('scores', JSON.stringify(updatedScores))
+
+      saveScore(newPoints)
     } else {
       setShowWrongAnswer(true)
     }
@@ -102,20 +131,19 @@ const Geral = () => {
     }, 1500)
   }
 
-  const saveScoreAndRedirect = () => {
-    const storedScores = JSON.parse(localStorage.getItem('playerScores') || '[]')
-    const updatedScores = [points, ...storedScores].slice(0, 5)
-    localStorage.setItem('playerScores', JSON.stringify(updatedScores))
+  const handleFinishQuiz = () => {
+    saveScore(points)
     navigate('/score')
   }
 
   const resetQuiz = () => {
+    saveScore(points)
     setQuestionIndex(0)
     setPoints(0)
     setSelectedAnswer(null)
   }
-  
-  const isQuizCompleted = questionIndex >= questions.length;
+
+  const isQuizCompleted = questionIndex >= questions.length
 
   return (
     <div
@@ -172,7 +200,7 @@ const Geral = () => {
                       navigate(`/quiz-${category}?level=${nextLevel}`)
                     }}
                   />
-                  <ViewScoresButton onClick={saveScoreAndRedirect} />
+                  <ViewScoresButton onClick={handleFinishQuiz} />
                 </div>
               </div>
             ) : (
@@ -182,7 +210,6 @@ const Geral = () => {
               </div>
             )}
           </div>
-
         )}
       </div>
     </div>
