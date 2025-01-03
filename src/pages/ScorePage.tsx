@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react'
 import BackBtn from '../components/BackButton'
 import SaveScoreButton from '../components/SaveScoreButton'
 import ClearScoreButton from '../components/ClearScoreButton'
+import { getFirestore, collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 interface ScoreData {
   [category: string]: {
@@ -11,16 +13,75 @@ interface ScoreData {
 
 const ScorePage = () => {
   const [scores, setScores] = useState<ScoreData>({})
+  const [visitorScores, setVisitorScores] = useState<ScoreData>({})
   const scoreRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const storedScores: ScoreData = JSON.parse(localStorage.getItem('scores') || '{}')
-    setScores(storedScores)
+    const storedVisitorScores = JSON.parse(sessionStorage.getItem('playerScores') || '{}')
+    setVisitorScores(storedVisitorScores)
+
+    const auth = getAuth()
+    const db = getFirestore()
+
+    const fetchScores = async (uid: string) => {
+      const scoresRef = collection(db, 'scores')
+      const q = query(scoresRef, where('uid', '==', uid))
+      const querySnapshot = await getDocs(q)
+      const userScores: ScoreData = {}
+
+      querySnapshot.forEach((doc) => {
+        const { points, category, level } = doc.data()
+        if (!userScores[category]) {
+          userScores[category] = {}
+        }
+        userScores[category][level] = points
+      })
+
+      setScores(userScores)
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user && !user.isAnonymous) {
+        fetchScores(user.uid)
+      } else {
+        setScores({})
+      }
+    })
   }, [])
 
-  const clearScores = () => {
-    localStorage.removeItem('scores')
-    setScores({})
+  const clearScores = async () => {
+    const auth = getAuth()
+    const db = getFirestore()
+  
+    const user = auth.currentUser
+    if (user) {
+      try {
+        const scoresRef = collection(db, 'scores')
+        const q = query(scoresRef, where('uid', '==', user.uid))
+        const querySnapshot = await getDocs(q)
+  
+        querySnapshot.forEach(async (docSnap) => {
+          await deleteDoc(doc(db, 'scores', docSnap.id))
+        })
+  
+        localStorage.removeItem('scores')
+        sessionStorage.removeItem('playerScores')
+  
+        setScores({})
+        setVisitorScores({})
+        alert('Pontuação apagada com sucesso do Firestore e localStorage!')
+      } catch (error) {
+        console.error('Erro ao deletar pontuação:', error)
+        alert('Erro ao apagar pontuação.')
+      }
+    } else {
+      localStorage.removeItem('scores')
+      sessionStorage.removeItem('playerScores')
+  
+      setScores({})
+      setVisitorScores({})
+      alert('Pontuação apagada do localStorage!')
+    }
   }
 
   const categoryStyles: { [key: string]: string } = {
@@ -28,6 +89,15 @@ const ScorePage = () => {
     flora: 'bg-leafGreen',
     geral: 'bg-skyBlue',
   }
+
+  const renderScoreCard = (category: string, level: string, score: number) => (
+    <li
+      key={`${category}-${level}`}
+      className='bg-white p-3 rounded text-black text-lg font-medium'
+    >
+      {level}: {score || 0} pontos
+    </li>
+  )
 
   return (
     <div
@@ -44,32 +114,32 @@ const ScorePage = () => {
       </header>
       <h1 className='text-3xl font-bold mb-6 text-white'>Pontuação</h1>
 
-      <div
-        className='w-full max-w-4xl flex flex-wrap justify-center gap-8 rounded-lg p-6 text-center'
-      >
-        {Object.keys(scores).length > 0 ? (
-          Object.entries(scores).map(([category, levels]) => (
-            <div
-              key={category}
-              className={`w-64 p-4 rounded shadow-lg ${categoryStyles[category] || 'bg-gray-500'}`}
-            >
-              <h2 className='text-2xl font-bold text-white capitalize'>{category}</h2>
-              <ul className='space-y-2 mt-3'>
-                {Object.entries(levels).map(([level, points]) => (
-                  <li
-                    key={level}
-                    className='bg-white p-3 rounded text-black text-lg font-medium'
-                  >
-                    {level}: {points} pontos
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        ) : (
-          <p className='text-white text-lg font-bold'>Nenhuma pontuação salva ainda.</p>
-        )}
+      <div className='w-full max-w-6xl flex justify-center gap-8 rounded-lg p-6 text-center'>
+        {['fauna', 'flora', 'geral'].map((category) => (
+          <div
+            key={category}
+            className={`flex-1 w-64 p-4 rounded shadow-lg ${categoryStyles[category] || 'bg-gray-500'} mb-4`}
+          >
+            <h3 className='text-xl font-bold text-white capitalize'>{category}</h3>
+            <ul className='space-y-2 mt-3'>
+              {['fácil', 'médio', 'difícil'].map((level) => {
+                const authenticatedScore = scores[category]?.[level] || 0
+                const visitorScore = visitorScores[category]?.[level] || 0
+                return renderScoreCard(
+                  category,
+                  level,
+                  authenticatedScore || visitorScore
+                )
+              })}
+            </ul>
+          </div>
+        ))}
       </div>
+
+      {Object.keys(scores).length === 0 && Object.keys(visitorScores).length === 0 && (
+        <p className='text-white text-lg font-bold'>Nenhuma pontuação salva ainda.</p>
+      )}
+
       <div className='flex items-center justify-center space-x-8 mt-6'>
         <ClearScoreButton onClear={clearScores} />
         <SaveScoreButton targetRef={scoreRef} />
