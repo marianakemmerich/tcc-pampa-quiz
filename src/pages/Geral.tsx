@@ -11,7 +11,7 @@ import CorrectAnswer from '../components/CorrectAnswer'
 import WrongAnswer from '../components/WrongAnswer'
 import RestartQuizButton from '../components/RestartButton'
 import ViewScoresButton from '../components/ScoreButton'
-import { getFirestore, collection, addDoc } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, where, query, getDocs, updateDoc } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 
 interface Option {
@@ -75,31 +75,53 @@ const Geral = () => {
     }
   }, [questions, questionIndex])
 
-  const saveScore = async (points: number) => {
-    const auth = getAuth()
-    const user = auth.currentUser
-    const db = getFirestore()
+  const saveScore = async (points: number, level: string) => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const db = getFirestore();
   
     if (user && !user.isAnonymous) {
       try {
-        const scoresCollection = collection(db, 'scores')
-        await addDoc(scoresCollection, {
-          uid: user.uid,
-          points,
-          timestamp: new Date(),
-        })
-        console.log('Pontuação salva no Firestore')
+        const scoresCollection = collection(db, 'scores');
+  
+        const existingDocRef = query(
+          scoresCollection,
+          where('uid', '==', user.uid),
+          where('level', '==', level),
+          where('category', '==', category)
+        );
+  
+        const querySnapshot = await getDocs(existingDocRef);
+  
+        if (querySnapshot.empty) {
+          await addDoc(scoresCollection, {
+            uid: user.uid,
+            points,
+            category,
+            level,
+            timestamp: new Date(),
+          });
+          console.log('Pontuação do nível salva no Firestore');
+        } else {
+          const docRef = querySnapshot.docs[0].ref;
+          await updateDoc(docRef, {
+            points,
+          });
+          console.log('Pontuação atualizada no Firestore');
+        }
       } catch (error) {
-        console.error('Erro ao salvar pontuação no Firestore:', error)
+        console.error('Erro ao salvar pontuação no Firestore:', error);
       }
     } else {
-      const storedScores = JSON.parse(sessionStorage.getItem('playerScores') || '[]')
-      const updatedScores = [points, ...storedScores].slice(0, 5)
-      sessionStorage.setItem('playerScores', JSON.stringify(updatedScores))
-      console.log('Pontuação salva no sessionStorage')
+      const storedScores = JSON.parse(sessionStorage.getItem('playerScores') || '{}');
+      const updatedScores = {
+        ...storedScores,
+        [level]: points,
+      };
+      sessionStorage.setItem('playerScores', JSON.stringify(updatedScores));
+      console.log('Pontuação salva no sessionStorage');
     }
-  }
-  
+  };    
 
   const verifyAnswer = (answer: string, isCorrect: boolean) => {
     setSelectedAnswer(answer)
@@ -109,18 +131,6 @@ const Geral = () => {
       const pointsPerQuestion = level === 'fácil' ? 25 : level === 'médio' ? 75 : 150
       const newPoints = points + pointsPerQuestion
       setPoints(newPoints)
-
-      const currentScores = JSON.parse(localStorage.getItem('scores') || '{}')
-      const updatedScores = {
-        ...currentScores,
-        [category]: {
-          ...currentScores[category],
-          [level]: Math.max(currentScores[category]?.[level] || 0, newPoints),
-        },
-      }
-      localStorage.setItem('scores', JSON.stringify(updatedScores))
-
-      saveScore(newPoints)
     } else {
       setShowWrongAnswer(true)
     }
@@ -133,12 +143,12 @@ const Geral = () => {
   }
 
   const handleFinishQuiz = () => {
-    saveScore(points)
+    saveScore(points, level)
     navigate('/score')
   }
 
   const resetQuiz = () => {
-    saveScore(points)
+    saveScore(points, level)
     setQuestionIndex(0)
     setPoints(0)
     setSelectedAnswer(null)
@@ -197,7 +207,8 @@ const Geral = () => {
                 <div className='flex gap-4 mt-4'>
                   <NextLevelButton
                     onNextLevel={() => {
-                      const nextLevel = level === 'fácil' ? 'médio' : 'difícil'
+                      saveScore(points, level)
+                      const nextLevel = level === 'fácil' ? 'médio' : level === 'médio' ? 'difícil' : 'fácil'
                       navigate(`/quiz-${category}?level=${nextLevel}`)
                     }}
                   />
