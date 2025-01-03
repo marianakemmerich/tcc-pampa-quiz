@@ -79,8 +79,8 @@ const Fauna = () => {
     const auth = getAuth()
     const user = auth.currentUser
     const db = getFirestore()
-
-    if (user) {
+  
+    if (user && !user.isAnonymous) {
       try {
         const scoresCollection = collection(db, 'scores')
         await addDoc(scoresCollection, {
@@ -88,17 +88,17 @@ const Fauna = () => {
           points,
           timestamp: new Date(),
         })
-        console.log('Score saved to Firestore')
+        console.log('Pontuação salva no Firestore')
       } catch (error) {
-        console.error('Error saving score to Firestore:', error)
+        console.error('Erro ao salvar pontuação no Firestore:', error)
       }
     } else {
       const storedScores = JSON.parse(sessionStorage.getItem('playerScores') || '[]')
       const updatedScores = [points, ...storedScores].slice(0, 5)
       sessionStorage.setItem('playerScores', JSON.stringify(updatedScores))
-      console.log('Score saved to sessionStorage')
+      console.log('Pontuação salva no sessionStorage')
     }
-  }
+  }  
 
   const verifyAnswer = (answer: string, isCorrect: boolean) => {
     setSelectedAnswer(answer)
