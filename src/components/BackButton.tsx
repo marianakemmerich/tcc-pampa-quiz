@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import ArrowBtn from '../assets/icons/left-arrow.svg'
 
 interface BackButtonProps {
@@ -7,11 +8,13 @@ interface BackButtonProps {
 }
 
 const BackButton = ({ onBackClick, navigateTo }: BackButtonProps) => {
+  const navigate = useNavigate()
+
   const handleBack = () => {
     if (onBackClick) {
       onBackClick()
     } else if (navigateTo) {
-      window.location.href = navigateTo
+      navigate(navigateTo)
     } else {
       window.history.back()
     }
