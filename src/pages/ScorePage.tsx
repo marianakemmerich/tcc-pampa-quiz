@@ -17,9 +17,21 @@ const ScorePage = () => {
   const scoreRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const storedVisitorScores = JSON.parse(sessionStorage.getItem('playerScores') || '{}')
+    const storedVisitorScores = JSON.parse(localStorage.getItem('playerScores') || '{}')
     setVisitorScores(storedVisitorScores)
 
+    const handleBeforeUnload = () => {
+      localStorage.removeItem('playerScores')
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [])
+
+  useEffect(() => {
     const auth = getAuth()
     const db = getFirestore()
 
@@ -42,8 +54,11 @@ const ScorePage = () => {
 
     onAuthStateChanged(auth, (user) => {
       if (user && !user.isAnonymous) {
+        localStorage.removeItem('playerScores')
         fetchScores(user.uid)
       } else {
+        const storedVisitorScores = JSON.parse(localStorage.getItem('playerScores') || '{}')
+        setVisitorScores(storedVisitorScores)
         setScores({})
       }
     })
@@ -65,7 +80,7 @@ const ScorePage = () => {
         })
   
         localStorage.removeItem('scores')
-        sessionStorage.removeItem('playerScores')
+        localStorage.removeItem('playerScores')
   
         setScores({})
         setVisitorScores({})
@@ -76,7 +91,7 @@ const ScorePage = () => {
       }
     } else {
       localStorage.removeItem('scores')
-      sessionStorage.removeItem('playerScores')
+      localStorage.removeItem('playerScores')
   
       setScores({})
       setVisitorScores({})
@@ -123,13 +138,13 @@ const ScorePage = () => {
             <h3 className='text-xl font-bold text-white capitalize'>{category}</h3>
             <ul className='space-y-2 mt-3'>
               {['fácil', 'médio', 'difícil'].map((level) => {
-                const authenticatedScore = scores[category]?.[level] || 0
-                const visitorScore = visitorScores[category]?.[level] || 0
+                const authenticatedScore = scores[category]?.[level] || 0;
+                const visitorScore = visitorScores[category]?.[level] || 0;
                 return renderScoreCard(
                   category,
                   level,
                   authenticatedScore || visitorScore
-                )
+                );
               })}
             </ul>
           </div>
