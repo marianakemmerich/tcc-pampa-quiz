@@ -32,10 +32,10 @@ const RewardModal = ({
             alt={commonName}
             className='w-full h-full object-cover rounded-lg'
           />
-          <div className='absolute inset-0 bg-leafGreen bg-opacity-75 text-white p-4 flex flex-col justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300'>
+          <div className='absolute inset-0 bg-leafGreen bg-opacity-75 text-white text-center p-4 flex flex-col justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300'>
             <h2 className='text-3xl font-bold mb-2'>{commonName}</h2>
             <p className='italic text-lg mb-4'>{scientificName}</p>
-            <p className='text-lg text-center'>{description}</p>
+            <p className='text-lg'>{description}</p>
           </div>
         </div>
       </div>
