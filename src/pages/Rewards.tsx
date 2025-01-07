@@ -13,7 +13,6 @@ const Rewards = () => {
     const auth = getAuth()
     const db = getFirestore()
 
-    // Função para buscar as pontuações no Firestore
     const fetchScores = async (uid: string) => {
       const scoresRef = collection(db, 'scores')
       const q = query(scoresRef, where('uid', '==', uid))
@@ -29,26 +28,27 @@ const Rewards = () => {
       })
 
       setScores(userScores)
-      localStorage.setItem('scores', JSON.stringify(userScores)) // Salvar pontuação no localStorage
+      localStorage.setItem('scores', JSON.stringify(userScores))
     }
 
-    // Verificar se o usuário está autenticado ou não
     const user = auth.currentUser
     if (user && !user.isAnonymous) {
-      fetchScores(user.uid) // Buscar pontuação do Firestore
+      fetchScores(user.uid)
     } else {
-      const storedScores = JSON.parse(localStorage.getItem('scores') || '{}')
-      setScores(storedScores) // Buscar pontuação do localStorage
+      const storedScores = JSON.parse(localStorage.getItem('playerScores') || '{}')
+      setScores(storedScores)
     }
   }, [])
 
   const isUnlocked = (reward: any) => {
-    const categoryScore = scores[reward.category]?.[reward.level] || 0
+    const visitorScores = JSON.parse(localStorage.getItem('playerScores') || '{}')
+    const categoryScore =
+      scores[reward.category]?.[reward.level] || visitorScores[reward.category]?.[reward.level] || 0
     return categoryScore >= reward.requiredPoints
   }
 
   const handleRewardClick = (reward: any) => {
-    setSelectedReward(reward) // Define a recompensa selecionada
+    setSelectedReward(reward)
   }
 
   const closeModal = () => setSelectedReward(null)
@@ -83,7 +83,7 @@ const Rewards = () => {
               src={reward.image}
               alt={`${reward.commonName} (${reward.scientificName})`}
               className='w-full h-full object-cover rounded-lg cursor-pointer'
-              onClick={() => handleRewardClick(reward)} // Adiciona a função de clique
+              onClick={() => handleRewardClick(reward)}
             />
             {!isUnlocked(reward) && (
               <div className='absolute inset-0 bg-black bg-opacity-90 rounded-lg flex items-center justify-center'>
