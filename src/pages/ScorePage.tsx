@@ -84,10 +84,10 @@ const ScorePage = () => {
   
         setScores({})
         setVisitorScores({})
-        alert('Pontuação apagada com sucesso do Firestore e localStorage!')
+        console.log('Pontuação apagada com sucesso do Firestore e localStorage!')
       } catch (error) {
         console.error('Erro ao deletar pontuação:', error)
-        alert('Erro ao apagar pontuação.')
+        console.log('Erro ao apagar pontuação.')
       }
     } else {
       localStorage.removeItem('scores')
@@ -95,9 +95,9 @@ const ScorePage = () => {
   
       setScores({})
       setVisitorScores({})
-      alert('Pontuação apagada do localStorage!')
+      console.log('Pontuação apagada do localStorage!')
     }
-  }
+  }  
 
   const categoryStyles: { [key: string]: string } = {
     fauna: 'bg-sunshine',
