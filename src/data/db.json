@@ -40,10 +40,10 @@
         "id": 4,
         "level": "fácil",
         "category": "fauna",
-        "question": "Dentre as espécies abaixo, é considerada uma espécie de mamífero exótica no pampa?",
+        "question": "Dentre as espécies abaixo, qual é considerada uma espécie de mamífero exótica no pampa?",
         "options": [
           { "answer": "Zorrilho (Conepatus chinga)", "isCorrect": false },
-          { "answer": "Graxaim-do- campo (Lycalopex gymnocercus)", "isCorrect": false },
+          { "answer": "Graxaim-do-campo (Lycalopex gymnocercus)", "isCorrect": false },
           { "answer": "Leão-baio (Puma concolor)", "isCorrect": false },
           { "answer": "Javali (Sus scofra) ", "isCorrect": true }
         ]
@@ -55,7 +55,7 @@
         "question": "O graxaim-do-campo (Lycalopex gymnocercus) é uma espécie é onívora que se alimenta de pequenos animais e frutos. Qual a contribuição ecológica da espécie para o bioma pampa?",
         "options": [
           { "answer": "Dispersão de sementes de árvores exóticas pelas suas excretas", "isCorrect": false },
-          { "answer": "Dispersão de sementes de árvores nativa pelas suas excretas", "isCorrect": true },
+          { "answer": "Dispersão de sementes de árvores nativas pelas suas excretas", "isCorrect": true },
           { "answer": "Controle biológico de patógenos das árvores nativas ", "isCorrect": false },
           { "answer": "Polinização das árvores nativas", "isCorrect": false }
         ]
@@ -64,19 +64,19 @@
         "id": 6,
         "level": "médio",
         "category": "fauna",
-        "question": "Qual é o nome científico do Gato-palheiro-pampeano?",
+        "question": "O Gato-palheiro-pampeano (Leopardus munoai) é um felídeo endêmico do bioma Pampa. É a espécie de felino mais desconhecida e ameaçada do Brasil, tendendo a ser extremamente raro. São ameaças à espécie, exceto:",
         "options": [
-          { "answer": "Leopardus munoai", "isCorrect": true },
-          { "answer": "Leopardus pardalis", "isCorrect": false },
-          { "answer": "Leopardus guttulus", "isCorrect": false },
-          { "answer": "Leopardus geoffroyi", "isCorrect": false }
+          { "answer": "Perda e descaracterização do habitat", "isCorrect": false },
+          { "answer": "Atropelamentos", "isCorrect": false },
+          { "answer": "Caça e perseguição", "isCorrect": false },
+          { "answer": "Presença de grandes predadores", "isCorrect": true }
         ]
       },
       {
         "id": 7,
         "level": "difícil",
         "category": "fauna",
-        "question": "São ameaças para a fauna nativa do bioma pampa, exceto:",
+        "question": "São ameaças para a fauna nativa do bioma Pampa, exceto:",
         "options": [
           { "answer": "Perda de hábitat pela substituição dos campos nativos por agricultura, silvicultura ou pastagens exóticas", "isCorrect": false },
           { "answer": "Descaracterização do hábitat por sobrepastejo e pisoteio pelo gado", "isCorrect": false },
@@ -90,7 +90,7 @@
         "id": 1,
         "level": "fácil",
         "category": "flora",
-        "question": "А vеgеtаçãо nativa do bioma pampa é composta predominantemente por:",
+        "question": "A vegetação nativa do bioma Pampa é composta predominantemente por:",
         "options": [
           { "answer": "Vegetação de restinga", "isCorrect": false },
           { "answer": "Espécies arbóreas como pinus e eucalipto", "isCorrect": false },
@@ -102,7 +102,7 @@
         "id": 2,
         "level": "fácil",
         "category": "flora",
-        "question": "É considerada uma espécie nativa da vegetação campestre do bioma pampa:",
+        "question": "É considerada uma espécie nativa da vegetação campestre do bioma Pampa:",
         "options": [
           { "answer": "Capim anonni (Eragrostis plana)", "isCorrect": false },
           { "answer": "Braquiária (Urochloa decumbens)", "isCorrect": false },
@@ -114,7 +114,7 @@
         "id": 3,
         "level": "fácil",
         "category": "flora",
-        "question": "É considerada uma espécie exótica da vegetação campestre do bioma pampa",
+        "question": "É considerada uma espécie exótica da vegetação campestre do bioma Pampa:",
         "options": [
           { "answer": "Bibi (Herbertia lahue)", "isCorrect": false },
           { "answer": "Capim-rabo-de-burro (Andropogon bicornis)", "isCorrect": false },
@@ -126,7 +126,7 @@
         "id": 4,
         "level": "médio",
         "category": "flora",
-        "question": "O Pampa é o bioma com a menor representatividade no Sistema Nacional de Unidades de Conservação. Uma das áreas de preservação ambiental dentro dos limites territoriais do bioma pampa é:",
+        "question": "O Pampa é o bioma com a menor representatividade no Sistema Nacional de Unidades de Conservação. Uma das áreas de preservação ambiental dentro dos limites territoriais do bioma Pampa é:",
         "options": [
           { "answer": "Área de Proteção Ambiental do Banhado Grande", "isCorrect": false },
           { "answer": "Parque Estadual de Itapuã", "isCorrect": false },
@@ -138,7 +138,7 @@
         "id": 5,
         "level": "médio",
         "category": "flora",
-        "question": "Atualmente, o  pastejo sobre os campos do pampa ocorre pelo gado introduzido pelos jesuítas. No entanto, anteriormente, havia um grupo de animais pastejadores que habitava o bioma e foram extintos. São eles:",
+        "question": "Atualmente, o  pastejo sobre os campos do Pampa ocorre pelo gado introduzido pelos jesuítas. No entanto, anteriormente, havia um grupo de animais pastejadores que habitava o bioma e foram extintos. São eles:",
         "options": [
           { "answer": "Cervídeos", "isCorrect": false },
           { "answer": "Equínos", "isCorrect": false },
@@ -150,7 +150,7 @@
         "id": 6,
         "level": "difícil",
         "category": "flora",
-        "question": "“Flor de tuna, camoatim de mel campeiro, pedra moura das quebradas do Inhanduy”. O trecho do Canto Alegretense faz referência a uma espécie de planta nativa do bioma pampa, a tuna, o Cereus hildmannianus que é:",
+        "question": "“Flor de tuna, camoatim de mel campeiro, pedra moura das quebradas do Inhanduy”. O trecho do Canto Alegretense faz referência a uma espécie de planta nativa do bioma Pampa, a Tuna (Cereus hildmannianus), que é:",
         "options": [
           { "answer": "Uma espécie arbórea", "isCorrect": false },
           { "answer": "Uma espécie de palmeira", "isCorrect": false },
@@ -162,7 +162,7 @@
         "id": 7,
         "level": "difícil",
         "category": "flora",
-        "question": "O butiá é um fruto nativo comestível muito apreciado pelos moradores do bioma pampa. O artesanato com a palha das folhas tornou-se um patrimônio cultural imaterial do Rio Grande do Sul. O butiá é:",
+        "question": "O butiá é um fruto nativo comestível muito apreciado pelos moradores do bioma Pampa. O artesanato com a palha das folhas tornou-se um patrimônio cultural imaterial do Rio Grande do Sul. O butiá é:",
         "options": [
           { "answer": "Uma palmeira da família Arecaceae", "isCorrect": true },
           { "answer": "Uma gramínea da família Poaceae", "isCorrect": false },
@@ -174,7 +174,7 @@
         "id": 8,
         "level": "difícil",
         "category": "flora",
-        "question": "O mate é um dos patrimônios culturais imateriais do estado do rio grande do sul e símbolo da cultura gaúcha. A bebida, feita da infusão de uma planta, é proveniente da contribuição indígena do povos do pampa. O nome científico da espécie é:",
+        "question": "O mate é um dos patrimônios culturais imateriais do estado do Rio Grande do Sul e símbolo da cultura gaúcha. A bebida, feita da infusão de uma planta, é proveniente da contribuição indígena do povos do Pampa. O nome científico da espécie é:",
         "options": [
           { "answer": "Eugenia uniflora", "isCorrect": false },
           { "answer": "Ilex paraguariensis", "isCorrect": true },
@@ -188,7 +188,19 @@
         "id": 1,
         "level": "fácil",
         "category": "geral",
-        "question": "O bіоmа Pаmра lосаlіzа-ѕе em qual estado brasileiro:",
+        "question": "O bioma Pampa é conhecido também como:",
+        "options": [
+          { "answer": "Sertão brasileiro", "isCorrect": false },
+          { "answer": "Savana do Brasil", "isCorrect": false },
+          { "answer": "Cerradão", "isCorrect": false },
+          { "answer": "Campos Sulinos", "isCorrect": true }
+        ]
+      },
+      {
+        "id": 2,
+        "level": "fácil",
+        "category": "geral",
+        "question": "O bioma Pampa localiza-se em qual estado brasileiro?",
         "options": [
           { "answer": "Rio Grande do Sul", "isCorrect": true },
           { "answer": "Santa Catarina", "isCorrect": false },
@@ -197,10 +209,10 @@
         ]
       },
       {
-        "id": 2,
+        "id": 3,
         "level": "fácil",
         "category": "geral",
-        "question": "O Bioma Pampa estende-se por outros dois países da América do Sul, são eles:",
+        "question": "O bioma Pampa estende-se por outros dois países da América do Sul, são eles:",
         "options": [
           { "answer": "Venezuela e Chile", "isCorrect": false },
           { "answer": "Chile e Uruguai", "isCorrect": false },
@@ -209,44 +221,32 @@
         ]
       },
       {
-        "id": 3,
+        "id": 4,
         "level": "fácil",
         "category": "geral",
-        "question": "Qual o nome do processo de deterioração generalizada em solos arenosos sob pressões combinadas entre um clima adverso e flutuante e de uma exploração excessiva?",
+        "question": "O clima típico do bioma Pampa é:",
         "options": [
-          { "answer": "Desertificação", "isCorrect": false },
-          { "answer": "Arenização", "isCorrect": true },
-          { "answer": "Sedimentação", "isCorrect": false },
-          { "answer": "Supressão da vegetação", "isCorrect": false }
-        ]
-      },
-      {
-        "id": 4,
-        "level": "médio",
-        "category": "geral",
-        "question": "Os principais impactos ambientais sobre os ecossistemas do bioma Pampa provém de atividades que removem a vegetação nativa como:",
-        "options": [
-          { "answer": "Silvicultura", "isCorrect": true },
-          { "answer": "Pecuária de leite", "isCorrect": false },
-          { "answer": "Pecuária de corte", "isCorrect": false },
-          { "answer": "Horticultura", "isCorrect": false }
+          { "answer": "Tropical de altitude", "isCorrect": false },
+          { "answer": "Tropical semiúmido", "isCorrect": false },
+          { "answer": "Subtropical", "isCorrect": true },
+          { "answer": "Equatorial", "isCorrect": false }
         ]
       },
       {
         "id": 5,
-        "level": "médio",
+        "level": "fácil",
         "category": "geral",
-        "question": "Um sistema de exploração do solo do bioma pampa com especialização em apenas um só produto e que ameaça o bioma pampa é:",
+        "question": "O avanço da produção agropecuária no bioma Pampa representa um desafio para a preservação, pois...",
         "options": [
-          { "answer": "Monocultura", "isCorrect": true },
-          { "answer": "Bovinocultura", "isCorrect": false },
-          { "answer": "Horticultura", "isCorrect": false },
-          { "answer": "Ecoturismo", "isCorrect": false }
+          { "answer": "Fragmenta habitats", "isCorrect": true },
+          { "answer": "Impulsiona políticas públicas", "isCorrect": false },
+          { "answer": "Preserva a biodiversidade", "isCorrect": false },
+          { "answer": "Incentiva o avanço de pesquisas científicas na área", "isCorrect": false }
         ]
       },
       {
         "id": 6,
-        "level": "médio",
+        "level": "fácil",
         "category": "geral",
         "question": "O relevo típico da região dos pampas pode ser denominado:",
         "options": [
@@ -258,9 +258,69 @@
       },
       {
         "id": 7,
+        "level": "fácil",
+        "category": "geral",
+        "question": "Em 2007, foi criado o Dia Nacional do Bioma Pampa, para celebrar e homenagear José Antônio Lutzenberger, um ícone do movimento ambientalista no Rio Grande do Sul. Essa data é comemorada no dia:",
+        "options": [
+          { "answer": "22 de março", "isCorrect": false },
+          { "answer": "5 de junho", "isCorrect": false },
+          { "answer": "21 de setembro", "isCorrect": false },
+          { "answer": "17 de dezembro", "isCorrect": true }
+        ]
+      },
+      {
+        "id": 11,
+        "level": "médio",
+        "category": "geral",
+        "question": "Os principais impactos ambientais sobre os ecossistemas do bioma Pampa provém de atividades que removem a vegetação nativa como:",
+        "options": [
+          { "answer": "Silvicultura", "isCorrect": true },
+          { "answer": "Pecuária de leite", "isCorrect": false },
+          { "answer": "Pecuária de corte", "isCorrect": false },
+          { "answer": "Horticultura", "isCorrect": false }
+        ]
+      },
+      {
+        "id": 12,
+        "level": "médio",
+        "category": "geral",
+        "question": "A vegetação do Pampa é amplamente aproveitada para a prática de qual atividade econômica?",
+        "options": [
+          { "answer": "Extrativismo vegetal", "isCorrect": false },
+          { "answer": "Agricultura de grãos", "isCorrect": false },
+          { "answer": "Pecuária extensiva", "isCorrect": true },
+          { "answer": "Exploração de madeira", "isCorrect": false }
+        ]
+      },
+      {
+        "id": 13,
+        "level": "médio",
+        "category": "geral",
+        "question": "Um sistema de exploração do solo com especialização em apenas um só produto e que ameaça o bioma Pampa é:",
+        "options": [
+          { "answer": "Monocultura", "isCorrect": true },
+          { "answer": "Bovinocultura", "isCorrect": false },
+          { "answer": "Horticultura", "isCorrect": false },
+          { "answer": "Ecoturismo", "isCorrect": false }
+        ]
+      },
+      {
+        "id": 14,
+        "level": "médio",
+        "category": "geral",
+        "question": "Existe um manancial de água que ocupa uma grandiosa porção subterrânea do centro-sul do Brasil, incluindo o bioma Pampa, cujo nome é:",
+        "options": [
+          { "answer": "Aquífero do Sul", "isCorrect": false },
+          { "answer": "Aquífero Alter do Chão", "isCorrect": false },
+          { "answer": "Aquífero Gaúcho", "isCorrect": false },
+          { "answer": "Aquífero Guarani", "isCorrect": true }
+        ]
+      },
+      {
+        "id": 21,
         "level": "difícil",
         "category": "geral",
-        "question": "Dentre as atividade econômicas desenvolvidas no bioma pampa, qual delas contribui para a manutenção da vegetação nativa:",
+        "question": "Dentre as atividade econômicas desenvolvidas no bioma Pampa, qual delas contribui para a manutenção da vegetação nativa?",
         "options": [
           { "answer": "Pecuária em campo nativo", "isCorrect": true },
           { "answer": "Pecuária em pastagem", "isCorrect": false },
@@ -269,15 +329,39 @@
         ]
       },
       {
-        "id": 8,
+        "id": 22,
         "level": "difícil",
         "category": "geral",
-        "question": "Existe um manancial de água que ocupa uma grandiosa porção subterrânea do centro-sul do brasil incluindo o bioma pampa, cujo nome é:",
+        "question": "Qual o nome do processo de deterioração generalizada em solos arenosos sob pressões combinadas entre um clima adverso e flutuante e de uma exploração excessiva?",
         "options": [
-          { "answer": "Aquífero do Sul", "isCorrect": false },
-          { "answer": "Aquífero Alter do Chão", "isCorrect": false },
-          { "answer": "Aquífero Gaúcho", "isCorrect": false },
-          { "answer": "Aquífero Guarani", "isCorrect": true }
+          { "answer": "Desertificação", "isCorrect": false },
+          { "answer": "Arenização", "isCorrect": true },
+          { "answer": "Sedimentação", "isCorrect": false },
+          { "answer": "Supressão da vegetação", "isCorrect": false }
+        ]
+      },
+      {
+        "id": 23,
+        "level": "difícil",
+        "category": "geral",
+        "question": "O bioma Pampa abrange uma área de cerca de 178 mil quilômetros quadrados do Rio Grande do Sul, o que equivale a:",
+        "options": [
+          { "answer": "2,07% do território gaúcho", "isCorrect": false },
+          { "answer": "35% do território gaúcho", "isCorrect": false },
+          { "answer": "50% do território gaúcho", "isCorrect": false },
+          { "answer": "63% do território gaúcho", "isCorrect": true }
+        ]
+      },
+      {
+        "id": 24,
+        "level": "difícil",
+        "category": "geral",
+        "question": "Entre 1985 e 2022, cerca de 2,9 milhões de hectares de campo nativo do Pampa foram desmatados para dar lugar à monocultura de grãos, levando à uma redução de ... da vegetação campestre do bioma.",
+        "options": [
+          { "answer": "20%", "isCorrect": true },
+          { "answer": "5%", "isCorrect": false },
+          { "answer": "3%", "isCorrect": false },
+          { "answer": "45%", "isCorrect": false }
         ]
       }
     ]
