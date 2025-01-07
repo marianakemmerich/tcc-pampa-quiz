@@ -1,8 +1,32 @@
-# Pampa Quiz
+# <img src="./src/assets/logo/pampa-quiz-logo.svg" alt="Logotype" style="margin-left: 20px; vertical-align: middle; width: 30px" />
 
-Pampa Quiz é um jogo web de perguntas e respostas desenvolvido como Trabalho de Conclusão de Curso de Análise e Desenvolvimento de Sistemas. O jogo aborda a temática do bioma pampa, ecossistema típico do Estado do Rio Grande do Sul.
+> Este é um jogo desenvolvido como Trabalho de Conclusão de Curso (TCC) para o Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas do Instituto Federal Farroupilha, Campus Alegrete.
 
-## Instalação
+<img src="./src/pampaquiz.gif">
+
+## 🗂️ Sobre o projeto
+
+O Pampa Quiz é um jogo web de perguntas e respostas que aborda a temática do bioma Pampa, ecossistema típico do Estado do Rio Grande do Sul.
+
+## ⚙️ Features
+
+- Cadastro e autenticação do usuário
+- Desbloqueio de recompensas
+- Feedback imediato
+
+## 🔨 Tecnologias utilizadas
+
+- React.js
+- TypeScript
+- Tailwind CSS
+- JSON Server
+- Axios
+- React Router DOM
+- HTML2Canvas
+- Google Firebase
+- Firestore
+
+## 🛠️ Instalação e uso
 
 Para rodar o projeto localmente, siga as seguintes etapas:
 
