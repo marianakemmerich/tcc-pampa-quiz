@@ -1,4 +1,4 @@
-# <img src="./src/assets/logo/pampa-quiz-logo.svg" alt="Logotype" style="margin-left: 20px; vertical-align: middle; width: 30px" />
+# <img src="./src/assets/logo/pampa-quiz-logo.svg" alt="Logotype" style="margin-left: 20px; vertical-align: middle; width: 250px" />
 
 > Este é um jogo desenvolvido como Trabalho de Conclusão de Curso (TCC) para o Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas do Instituto Federal Farroupilha, Campus Alegrete.
 
